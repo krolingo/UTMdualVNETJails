@@ -41,7 +41,7 @@ hostname="hostname"
 ## VTNET0 (Shared Network)
 ifconfig_vtnet0="192.168.64.64/24"
 
-## VTNET0 (Bridged Network)
+## VTNET1 (Bridged Network)
 ifconfig_vtnet1="DHCP"
 
 ## VTNET2 (third virtual network on host for the Jails)
