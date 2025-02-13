@@ -178,13 +178,22 @@ pass in inet proto icmp from any to any icmp-type echoreq keep state
 
 ### Creating a Jail with Dual VNET Interfaces
 
-##### Create the Jail
+##### To create a VNET-enabled jail with Bastille:
 
 ```sh
 bastille create -B myjail 14.2-RELEASE 192.168.64.100 bridge0
 ```
 
-After creation, manually add the second **VNET** interface (`bridge2`) to the jail.
+- -B → Enables VNET mode, which isolates the jail's network stack from the host.
+myjail → Jail name.
+
+- 14.2-RELEASE → FreeBSD version for the jail.
+
+- 192.168.64.100 → Static IP assigned to the jail.
+
+- bridge0 → Primary network interface.
+
+After creation, a second VNET interface (bridge2) is manually added.
 
 ##### `/usr/local/bastille/jails/myjail/jail.conf`
 
