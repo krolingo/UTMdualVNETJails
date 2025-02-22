@@ -36,12 +36,9 @@ This guide explains how to set up a FreeBSD VM on macOS using UTM with dual VNET
 hostname="hostname"
 
 ## Network Interfaces
+
 # Bring up physical interfaces without IP aliases.
-
-## VTNET0 (Shared Network)
-ifconfig_vtnet0="192.168.64.64/24"
-
-## VTNET1 (Bridged Network)
+ifconfig_vtnet0="up"
 ifconfig_vtnet1="DHCP"
 
 ## VTNET2 (third virtual network on host for the Jails)
@@ -52,7 +49,7 @@ defaultrouter="192.168.10.1"
 
 sshd_enable="YES"
 moused_nondefault_enable="NO"
-dumpdev="AUTO"
+dumpdev="NO"
 zfs_enable="YES"
 sshd_enable="YES"
 
@@ -72,18 +69,12 @@ bastille_enable="YES"
 cloned_interfaces="lo1 bridge0 bridge2"
 ifconfig_lo1_name="bastille0"
 
-# Configure bridge0:
-ifconfig_bridge0="up"
-ifconfig_bridge0_alias0="192.168.64.64/24"
+## Create bridge0 and add vtnet0:
+ifconfig_bridge0="addm vtnet0 up"
+ifconfig_bridge0_alias0="inet 192.168.64.64 netmask 255.255.255.0"
 
-# Remove this line since rc.local handles adding vtnet0:
-# ifconfig_bridge0_addm="vtnet0"
-
-# Create a bridge for the third NIC.
-ifconfig_bridge2="up"
-ifconfig_bridge2="DHCP"
-# Remove this line since rc.local handles adding vtnet2:
-#ifconfig_bridge2_addm="vtnet2"
+## Create bridge2, add vtnet2, and enable DHCP:
+ifconfig_bridge2="addm vtnet2 DHCP up"
 ```
 
 ##### `/etc/rc.local` (VM Host)
