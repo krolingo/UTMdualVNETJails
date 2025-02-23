@@ -73,8 +73,11 @@ ifconfig_lo1_name="bastille0"
 ifconfig_bridge0="addm vtnet0 up"
 ifconfig_bridge0_alias0="inet 192.168.64.64 netmask 255.255.255.0"
 
-## Create bridge2, add vtnet2, and enable DHCP:
-ifconfig_bridge2="addm vtnet2 DHCP up"
+## Create bridge2, add vtnet2:
+ifconfig_bridge2="addm vtnet2 up"
+
+## Explicitly enable DHCP for bridge2
+ifconfig_bridge2_ipv4="DHCP"
 ```
 
 ~~##### `/etc/rc.local` (VM Host)~~
