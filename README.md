@@ -77,17 +77,17 @@ ifconfig_bridge0_alias0="inet 192.168.64.64 netmask 255.255.255.0"
 ifconfig_bridge2="addm vtnet2 DHCP up"
 ```
 
-~~ ##### `/etc/rc.local` (VM Host) ~~
+~~##### `/etc/rc.local` (VM Host)~~
 
-~~ This script ensures the VM network interfaces are assigned to the appropriate bridges. ~~
+~~This script ensures the VM network interfaces are assigned to the appropriate bridges.~~
 
-~~ ```sh
+~~```sh
 #!/bin/sh
 ifconfig bridge0 addm vtnet0
 ifconfig bridge2 addm vtnet2
 dhclient bridge2
-exit 0
-``` ~~
+exit 0~~
+```
 
 ## PF Configuration
 
